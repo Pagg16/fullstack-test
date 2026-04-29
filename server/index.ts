@@ -105,6 +105,7 @@ app.post("/api/request", (req: Request, res: Response) => {
 
   return new Promise<void>((resolve) => {
     queue.enqueue(type, data, (result: any) => {
+      console.log(store.allItems.size);
       res.json(result);
       resolve();
     });

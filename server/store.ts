@@ -10,13 +10,8 @@ interface PagedResult<T> {
   total: number;
 }
 
-interface StoreState {
-  selectedOrder: ItemId[];
-  selectedIds: ItemId[];
-}
-
 class Store {
-  private allItems: Map<ItemId, Item>;
+  public allItems: Map<ItemId, Item>;
   private allIds: ItemId[];
 
   private selectedItems: Map<ItemId, Item>;
@@ -43,6 +38,7 @@ class Store {
   }
 
   initialize(): void {
+    console.log("init");
     for (let i = 1; i <= 1000000; i++) {
       const id = String(i);
       const item = { id, name: `Item ${id}` };
@@ -62,6 +58,7 @@ class Store {
       }
       this.charIndex.get(char)!.push(id);
     }
+    console.log("ready");
   }
 
   addItem(id: ItemId | number): boolean {
