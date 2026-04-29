@@ -1,0 +1,26 @@
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.right-panel__list {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.right-panel__virtuoso {
+  height: 100%;
+  width: 100%;
+}
+
+.sortable-item {
+  display: flex;
+  align-items: center;
+}
+
+.drag-handle {
+  cursor: grab;
+  margin-right: 8px;
+}

@@ -1,0 +1,21 @@
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+}
+
+.left-panel__list {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.left-panel__virtuoso {
+  height: 100%;
+  width: 100%;
+}
