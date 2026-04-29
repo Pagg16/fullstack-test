@@ -98,39 +98,17 @@ function handleModifyRequest(data: ModifyRequestData): { success: boolean } {
 }
 
 app.post("/api/request", (req: Request, res: Response) => {
-  try {
-    console.log("REQUEST HIT");
-    console.log("BODY:", req.body);
+  const { type, data } = req.body as {
+    type: RequestType;
+    data: QueueData;
+  };
 
-    const { type, data } = req.body as {
-      type: RequestType;
-      data: QueueData;
-    };
-
-    console.log("👉 BEFORE QUEUE");
-
+  return new Promise<void>((resolve) => {
     queue.enqueue(type, data, (result: any) => {
-      try {
-        console.log("👉 CALLBACK FIRED");
-        console.log("RESULT:", result);
-        console.log("STORE SIZE:", store.allItems.size);
-
-        if (!result) {
-          console.log("RESULT IS EMPTY");
-        }
-
-        res.json(result ?? { ok: true });
-      } catch (err) {
-        console.error("ERROR IN CALLBACK:", err);
-        res.status(500).json({ error: "callback error" });
-      }
+      res.json(result);
+      resolve();
     });
-
-    console.log("AFTER QUEUE CALL");
-  } catch (err) {
-    console.error("REQUEST ERROR:", err);
-    res.status(500).json({ error: "request fadiled" });
-  }
+  });
 });
 
 const PORT: number = Number(process.env.PORT) || 3001;
